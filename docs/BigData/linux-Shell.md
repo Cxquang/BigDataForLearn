@@ -136,7 +136,7 @@ Init 是 Linux 操作系统中不可缺少的程序之一。init进程是 Linux�
 * #touch /tmp/file2 在指定目录/tmp下创建 file2文件
 * touch可以用来修改已存在文件的元数据时间，如下
 
-<div align="center"> <img src="../_picture/linux-Shell/5、touch命令修改元数据时间.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/5、touch命令修改元数据时间.png"/> </div>
 
 **<font color=red size=4>可以通过这个命令来监测重要文件是否被访问过</font>**
 
@@ -228,20 +228,20 @@ Init 是 Linux 操作系统中不可缺少的程序之一。init进程是 Linux�
 
 ### 3.1.14 硬/软连接ln
 * #ln install.log.syslog sxt.txt &nbsp; &nbsp;以sxt.txt名连接到install.log.syslog文件，即两个名字引用同一份文件，如果删除sxt.txt或者删除install.log.syslog，另一份还是会保留下来内容，这是硬链接
-<div align="center"> <img src="../_picture/linux-Shell/1、ln命令.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/1、ln命令.png"/> </div>
 
 **<font color=red size=4>删除其中一个文件引用时</font>**
-<div align="center"> <img src="../_picture/linux-Shell/2、硬链接删除.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/2、硬链接删除.png"/> </div>
 
 * #ln -s sxt.txt bjsxt.log &nbsp; &nbsp;为sxt.txt文件创建一个快捷方式【索引不同】，即为软链接，删除不影响源文件，但把sxt.txt删除会使bjsxt.log快捷方式变红警告，如果重新创建sxt.txt那么bjsxt.txt又恢复成指向sxt.txt的快捷方式
-<div align="center"> <img src="../_picture/linux-Shell/3、软链接.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/3、软链接.png"/> </div>
 
 **<font color=red size=4>删除源文件时，</font>**
-<div align="center"> <img src="../_picture/linux-Shell/3、软链接删除源文件.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/3、软链接删除源文件.png"/> </div>
 
 ### 3.1.15 stat查看元数据
 * #stat /etc/profile &nbsp; &nbsp;查看profile文件的元数据【文件属性】
-<div align="center"> <img src="../_picture/linux-Shell/4、stat命令查看元数据.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/4、stat命令查看元数据.png"/> </div>
 
 * Access【最近访问】：访问文件的时间
 * Modify【最近更改】：更改文件的内容时间
@@ -298,7 +298,7 @@ exec: exec [-cl] [-a 名称] [命令 [参数 ...]] [重定向 ...]
 
 * **<font color=red size=4>一个例子：exec ls -l /</font>**
 
-<div align="center"> <img src="../_picture/linux-Shell/20、exec命令.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/20、exec命令.png"/> </div>
 
 **<font color=black size=4>上述命令执行后会先打印根目录信息，然后退出当前bash进程。解释：exec是一个shell内部命令，即shell自己使用一个命令替换自己。bash是一个进程，进程中有栈、堆、二进制代码段【程序段】，exec是bash中的一个功能模块。而ls是磁盘中的一个程序文件，执行上述命令时，bash会把ls的二进制执行程序文件的所有代码压到bash中的进程代码段中，相当于覆盖。那么CPU执行程序时，会从进程中读取到ls代码去执行。而ls最后会有一条指令是退出程序的指令，那么这条指令一执行，进程就被杀死了，所以TCP连接就断开了</font>**
 
@@ -457,11 +457,11 @@ orange 8
 * 查找指定行/str/
 
 
-<div align="center"> <img src="../_picture/linux-Shell/7、sed命令替换.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/7、sed命令替换.png"/> </div>
 
 **<font color=black size=4>通过匹配方式简化命令</font>**
 
-<div align="center"> <img src="../_picture/linux-Shell/7、sed命令替换1.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/7、sed命令替换1.png"/> </div>
 
 ```bash
 [root@master ~]# cat sort.txt 
@@ -655,7 +655,7 @@ John	4500	worker
 在linux中，文件系统以根目录结构显示，下面的各个子目录可以挂载到分区中，只要一个目录在根的某个位置，那么无论这个目录时挂载到哪个分区，任何程序都可以访问该目录【通过目录所在根结构的位置】
 
 ## 4.2 linux下的目录和文件类型
-<div align="center"> <img src="../_picture/linux-Shell/11、文件详细信息.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/11、文件详细信息.png"/> </div>
 
 * 权限列中一共 10 个字符，第一个字符代表文件类型，后边9 个字符 3 个为一组表示不同用户的权限<br>
 
@@ -806,11 +806,11 @@ ctrl：f【往前】，b【往后】
 ### 6.4.2 **<font color=red size=5> /：查找</font>**
 * **<font color=red size=4>/after</font>**
 	* :/after：【前面有冒号】搜索after，定位到所在目标的行开头【从光标所在位置开始搜索】
-<div align="center"> <img src="../_picture/linux-Shell/6、有冒号搜索.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/6、有冒号搜索.png"/> </div>
 
 	* /after：搜索after，直接定位到目标所在的第一个位置【从光标所在位置开始搜索】
 
-<div align="center"> <img src="../_picture/linux-Shell/6、无冒号搜索.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/6、无冒号搜索.png"/> </div>
 
 * **<font color=red size=4>n，N</font>**
 * **<font color=red size=4>？向上查找</font>**
@@ -985,12 +985,12 @@ ooxx12121212ooxx
 * useradd caixianquan &nbsp; &nbsp;添加caixianquan用户【在linux下添加用户也需要用户密码】
 * passwd caixianquan &nbsp; &nbsp; 在root用户下，修改caixianquan用户密码【在普通用户下，直接输入passwd命令即可修改密码】
 
-<div align="center"> <img src="../_picture/linux-Shell/8、passwd命令修改密码.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/8、passwd命令修改密码.png"/> </div>
 
 * su caixianquan-master &nbsp; &nbsp;切换用户【root切换普通用户不需要密码，而普通用户切换另一个用户需要密码】\
 * id caixianquan &nbsp; &nbsp; 显示caixianquan用户的元数据信息【如下，能看到uid(用户ID)、gid(初始组ID), groups是用户所在组，这里既可以看到初始组，如果有附加组，则也能看到附加组】
 
-<div align="center"> <img src="../_picture/linux-Shell/9、显示用户信息.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/9、显示用户信息.png"/> </div>
 
 ## 8.3 共享目录
 使这个目录【/share】能够仅给caixianquan、caixianquan-master和root使用<br>
@@ -998,21 +998,21 @@ ooxx12121212ooxx
 * groupadd dsgshare &nbsp; &nbsp;添加dsgshare组
 * usermod -a -G dsgshare caixianquan &nbsp; &nbsp; 修改caixianquan用户元数据，添加到dsgshare组中【同理添加caixianquan-master到dsgshare组中】
 
-<div align="center"> <img src="../_picture/linux-Shell/10、添加用户到组中.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/10、添加用户到组中.png"/> </div>
 
 **<font color=black size=4>可以看到对应的caixianquan用户和caixianquan-master用户的元数据的所在组发生了变化，不仅属于自己的caixianquan组，也属于dsgshare组</font>**
 
 * 修改share目录所属用户和组
 	* chown root:dsgshare share &nbsp; &nbsp;share目录让root用户所有，属于dsgshare组
 
-<div align="center"> <img src="../_picture/linux-Shell/12、修改文件所属组.png"/> </div>
-<div align="center"> <img src="../_picture/linux-Shell/12、修改文件所属组1.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/12、修改文件所属组.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/12、修改文件所属组1.png"/> </div>
 
 * 修改share目录权限
 	* chmod g+w share &nbsp; &nbsp; 增加share目录组权限w【**<font color=red size=4>g代表group，o代表other（其他组）u代表所属用户；w代表写入，r代表读取，x代表执行（进入目录即打开）；+或-代表增加或删除</font>**】
 	* chmod o-rx share&nbsp; &nbsp;  去除其他的权限r和x
 
-<div align="center"> <img src="../_picture/linux-Shell/13、修改目录权限.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/13、修改目录权限.png"/> </div>
 
 **<font color=red size=4>【注意，此时已经可以使share目录共享给root、caixianquan和caixianquan-master用户了，但要注意，如果修改权限前用户已经登录了，修改后需要用户重新登录才能变更权限】</font>**
 
@@ -1056,7 +1056,7 @@ drwxr-xr-x. 4 50469 users     43 12月 16 2014 tests
 
 * 查看目录中的README文件，搜索Install
 
-<div align="center"> <img src="../_picture/linux-Shell/14、编译安装.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/14、编译安装.png"/> </div>
 
 **<font color=red size=4>从上图可知，按照三步走即可安装</font>**
 
@@ -1066,44 +1066,44 @@ drwxr-xr-x. 4 50469 users     43 12月 16 2014 tests
 	* --help &nbsp; &nbsp;查看./configure命令帮助文档
 	* --prefix=PATH	&nbsp; &nbsp;设置安装路径
 
-<div align="center"> <img src="../_picture/linux-Shell/14、编译安装1.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/14、编译安装1.png"/> </div>
 
 **<font color=red size=4>编译报错，找不到C语言的编译器，说明这个nginx是由C语言开发的【直接通过yum install gcc -y安装即可（自动选择y确认安装），然后重新编译】</font>**
 
-<div align="center"> <img src="../_picture/linux-Shell/14、编译安装2.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/14、编译安装2.png"/> </div>
 
 报错找不到pcre，通过yum搜索：yum search pcre<br>
 【如果yum有问题,通过：yum check-update；yum update；yum clean all进行解决】
-<div align="center"> <img src="../_picture/linux-Shell/14、编译安装3.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/14、编译安装3.png"/> </div>
 
 **<font color=red size=4>可以看到有i686结尾的，即32位，x86_64结尾的，即64位的，一般程序会自动安装符合当前系统的最佳版本，直接yum install pcre-devel</font>**
 
-<div align="center"> <img src="../_picture/linux-Shell/14、编译安装4.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/14、编译安装4.png"/> </div>
 
 **<font color=red size=4>自动识别将要安装的pcre为64位，，确认安装</font>**<br>
 
 通过继续编译安装，还要再安装一个OpenSSL，编译后就会产生Makefile文件
 
-<div align="center"> <img src="../_picture/linux-Shell/14、编译安装.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/14、编译安装.png"/> </div>
 
 * make：编译【目录必须有Makefile文件，才能执行make】
 * make install clean 等【拷贝过程】
 
-<div align="center"> <img src="../_picture/linux-Shell/14、编译安装6.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/14、编译安装6.png"/> </div>
 
 **<font color=red size=4>此时，安装已完成，在指定目录/opt/caixianquan/nginx下可以看到安装后的文件，直接运行sbin目录下的nginx文件，即可运行nginx服务器</font>**<br>
 
-<div align="center"> <img src="../_picture/linux-Shell/14、编译安装7.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/14、编译安装7.png"/> </div>
 
 ## 9.2 rpm安装：包
 * rpm -i jdk-7u67-linux-x64.rpm &nbsp; &nbsp; rpm命令安装jdk
 
-<div align="center"> <img src="../_picture/linux-Shell/15、rpm安装.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/15、rpm安装.png"/> </div>
 
 * rpm -qa &nbsp; &nbsp; rpm查询所有安装的软件【rpm -qa | grep jdk&nbsp; &nbsp; 仅查询目标软件】
 * rpm -ql jdk-1.7.0_67-fcs | more &nbsp; &nbsp;  分屏显示目标软件安装的位置
 
-<div align="center"> <img src="../_picture/linux-Shell/15、rpm安装1.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/15、rpm安装1.png"/> </div>
 
 * whereis java &nbsp; &nbsp; 查看java命令所在位置
 * 编辑/etc/profile文件
@@ -1144,7 +1144,7 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
 curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 ```
 
-<div align="center"> <img src="../_picture/linux-Shell/16、yum安装.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/16、yum安装.png"/> </div>
 
 * yum clean all&nbsp; &nbsp; 清除本地缓存
 * yum makecache
@@ -1179,7 +1179,7 @@ gpgcheck=0【关闭验证】
 * 两种输入：用户交互输入和文本文件输入
 * bash是一个程序，可以多次启动bash，如下图【每启动一个bash进程的id号是不同的】
 
-<div align="center"> <img src="../_picture/linux-Shell/18、bash进程.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/18、bash进程.png"/> </div>
 
 ## 10.2 文本文件输入例子
 
@@ -1192,7 +1192,7 @@ echo $$
 * 执行：source test.txt或者**<font color=black size=4>.</font>** test.txt【bash将会执行test.txt文件中的命令】
 * /bin/bash test.txt【启用子进程执行文件中的命令，完成后就退出子进程，如下图】
 
-<div align="center"> <img src="../_picture/linux-Shell/18、bash进程1.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/18、bash进程1.png"/> </div>
 
 **<font color=black size=4>首先查看当前进程为20022，使用/bin/bash 执行test.txt文件后显示的子进程是20147，结束后再显示当前进程为20022，所以子进程执行完命令后返回父进程</font>** <br>
 
@@ -1277,15 +1277,15 @@ ooxx ()
 
 假设有两个终端【xshell】连接同一台linux，那么linux系统会为这两个终端建立两个进程，如下
 
-<div align="center"> <img src="../_picture/linux-Shell/19、重定向.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/19、重定向.png"/> </div>
 
 这两个终端的数据传输简单如下图所示，每个bash进程和各自ssh客户端通信
 
-<div align="center"> <img src="../_picture/linux-Shell/19、重定向1.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/19、重定向1.png"/> </div>
 
 如果想要让ssh客户端1输入命令，Bash进程处理结果显示在ssh客户端2中那么需要让bash进程1的标准输出指向2即可
 
-<div align="center"> <img src="../_picture/linux-Shell/19、重定向2.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/19、重定向2.png"/> </div>
 
 ### 10.3.7 输出流
 * ls -l / 1> ls.out &nbsp; &nbsp;  将ls执行的命令显示出的根目录输出到ls.out中【**<font color=red size=4>输出流1和重定向符> 要合在一起写，不能分开</font>**】
@@ -1736,19 +1736,19 @@ fi
 * **<font color=black size=4>.</font>**和source：在当前 shell 中执行一个文件中的命令【都是bash内部命令，都是读取文本文件执行文件中的bash语句】
 * pstree &nbsp; &nbsp;  以树状形式查看进程
 
-<div align="center"> <img src="../_picture/linux-Shell/17、pstree命令.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/17、pstree命令.png"/> </div>
 
 # 
 参考地址：[条件概率，全概率，贝叶斯公式理解](https://www.jianshu.com/p/c59851b1c0f3)
 强调模板：**<font color=red size=4>强调部分</font>**
-公式图片：<img src="../_picture/linux-Shell/公式.gif"/>
+公式图片：<img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/公式.gif"/>
 公式编辑：<img src="http://latex.codecogs.com/gif.latex?O(M*log_2M) + O(M+N)"/>
 
-<div align="center"> <img src="../_picture/linux-Shell/软链接.png"/> </div>
-<div align="center"> <img src="../_picture/linux-Shell/软链接.png"/> </div>
-<div align="center"> <img src="../_picture/linux-Shell/软链接.png"/> </div>
-<div align="center"> <img src="../_picture/linux-Shell/软链接.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/软链接.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/软链接.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/软链接.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/软链接.png"/> </div>
 &nbsp; &nbsp; 
 
-<div align="center"> <img src="../_picture/linux-Shell/软链接.png"/> </div>
-<div align="center"> <img src="../_picture/linux-Shell/软链接.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/软链接.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/linux-Shell/软链接.png"/> </div>
