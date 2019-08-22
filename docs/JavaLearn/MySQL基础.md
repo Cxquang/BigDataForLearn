@@ -82,26 +82,26 @@ create table 表名(
 
 **<font color=black size=4>在图形界面中，选中连接对象，右键执行SQL脚本</font>**
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/1、执行SQL脚本.png"/> </div>
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/1、执行SQL脚本1.png"/> </div>
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/1、执行SQL脚本2.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/1、执行SQL脚本.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/1、执行SQL脚本1.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/1、执行SQL脚本2.png"/> </div>
 
 ### 2.7 myemployees库表格介绍
 * employees表
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/2、employees表.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/2、employees表.png"/> </div>
 
 * departments表
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/2、departments表.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/2、departments表.png"/> </div>
 
 * jobs表
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/2、jobs表.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/2、jobs表.png"/> </div>
 
 * locations表
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/2、locations表.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/2、locations表.png"/> </div>
 
 * job_grades表：工资级别表，手动创建
 
@@ -134,15 +134,15 @@ VALUES('F', 25000, 40000);
 ### 2.8 girls库表格介绍
 * admin表
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/7、admin表.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/7、admin表.png"/> </div>
 
 * beauty表
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/5、beauty表.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/5、beauty表.png"/> </div>
 
 * boys表
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/6、boys表.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/6、boys表.png"/> </div>
 
 # 三、DQL语言的学习   ★              
 ## 3.1 基础查询        ★
@@ -929,7 +929,7 @@ mysql> SELECT * FROM employees WHERE hiredate = STR_TO_DATE('4-3 1992','%c-%d %Y
 ```
 
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/3、日期格式表.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/3、日期格式表.png"/> </div>
 
 #### 3.5.3.9 date_format
 将日期转换成字符
@@ -1218,7 +1218,7 @@ mysql> SELECT department_id, AVG(salary) FROM employees group by department_id;
 12 rows in set (0.00 sec)
 ```
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/4、分组查询.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/4、分组查询.png"/> </div>
 
 * 特点：<br>
 1、和分组函数一同查询的字段必须是group by后出现的字段<br>
@@ -1474,7 +1474,7 @@ mysql> SELECT job_id,MAX(salary) m
 又称多表查询，当查询的字段来自于多个表时，就会用到连接查询
 ### 3.8.2 笛卡尔乘积
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/8、笛卡尔乘积现象.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/8、笛卡尔乘积现象.png"/> </div>
 
 * 笛卡尔乘积现象：表1 有m行，表2有n行，结果=m*n行
 * 发生原因：没有有效的连接条件
@@ -1503,7 +1503,7 @@ mysql> SELECT job_id,MAX(salary) m
 ②区分多个重名的字段<br>
 注意：如果为表起了别名，则查询的字段就不能使用原来的表名去限定<br>
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/9、起别名报错.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/9、起别名报错.png"/> </div>
 
 ```sql
 【查询女神名和对应的男神名】
@@ -1680,7 +1680,7 @@ mysql>  SELECT e.last_name,m.last_name
 #### 3.8.5.3 外连接
 * 应用场景：用于查询一个表中有，另一个表没有的记录
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/10、外连接.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/10、外连接.png"/> </div>
 
 * 特点：<br>
 1、外连接的查询结果为主表中的所有记录<br>
@@ -2255,7 +2255,7 @@ WHERE 0;
 
 ### 5.3.2 整型
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/11、整型.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/11、整型.png"/> </div>
 
 * 特点：<br>
 ① 如果不设置无符号还是有符号，默认是有符号，如果想设置无符号，需要添加unsigned关键字<br>
@@ -2276,7 +2276,7 @@ CREATE TABLE tab_int(
 
 ### 5.3.3 小数
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/12、小数.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/12、小数.png"/> </div>
 
 * 1.浮点型<br>
 float(M,D)<br>
@@ -2350,7 +2350,7 @@ mysql> select * from tab_float1;
 
 ### 5.3.4 字符型
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/14、字符类型.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/14、字符类型.png"/> </div>
 
 较短的文本：<br>
 
@@ -2456,7 +2456,7 @@ blob(较大的二进制)<br>
 
 ### 5.3.5 日期型
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/15、日期类型.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/15、日期类型.png"/> </div>
 
 * timestamp和实际时区有关，更能反映实际的日期，而datetime则只能反映出插入时的当地时区
 
@@ -2716,7 +2716,7 @@ savepoint 节点名;设置保存点<br>
 * 一个事务与其他事务隔离的程度称为隔离级别。数据库规定了多种事务隔离级别, 不同隔离级别对应不同的干扰程度, 隔离级别越高, 数据一致性就越好, 但并发性越弱.
 
 
-<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/MySQL基础/16、数据库的隔离级别.png"/> </div>
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/16、数据库的隔离级别.png"/> </div>
 
 # 七、视图的讲解           √
 ## 7.1 视图的介绍
