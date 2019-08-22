@@ -24,9 +24,10 @@
         border-radius: 5px;
     }
     .markdown-section p.tip,
-    .markdown-section tr:nth-child(1n) {
+	/*默认表格颜色*/
+   */ .markdown-section tr:nth-child(1n) {
     	background-color: #f8f8f8 !important;
-	}
+	}*/
     .content,
     .sidebar,
     .markdown-section,
@@ -329,6 +330,18 @@
         margin-top: 0;
     }
     </style>
+	<style type="text/css">
+    tbody tr:nth-child(odd) {
+    	background-color: #efefef !important; 
+    }
+    tbody tr:nth-child(even) {
+    	background-color: #ffffff !important; 
+	}
+	/*表格左对齐*/
+	table{
+		text-align:left;
+	}
+	</style>
 </head>
 <body>
   <div id="app"></div>
@@ -364,6 +377,8 @@
   <script src="//unpkg.com/prismjs/components/prism-powershell.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-javascript.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-bash.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-json.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-sql.js"></script>
   <!-- 图片缩放插件 -->
   <script src="/jQuery/zoom-image.min.js"></script>
 </body>
