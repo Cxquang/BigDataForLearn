@@ -417,12 +417,13 @@ mysql> SELECT
 +-----------+
 2 rows in set (0.00 sec)
 --------------------------------------------
+【查询第二个字符为_的名字的员工】
 mysql> SELECT
     -> last_name
     -> FROM
     -> employees
     -> WHERE
-    -> last_name LIKE '_$_%' ESCAPE '$'; --说明$为转移字符
+    -> last_name LIKE '_$_%' ESCAPE '$'; --说明$为转义字符
 +-----------+
 | last_name |
 +-----------+
@@ -821,7 +822,7 @@ mysql> SELECT LPAD('殷素素',10,'*') AS out_put;
 | *******殷素素       |
 +------------+
 1 row in set (0.00 sec)
-【如果指定长度小于原字符串，那么将是截取】
+【如果指定长度小于原字符串，那么将是截取，LPAD和RPAD一样】
 mysql> SELECT LPAD('殷素素',2,'*') AS out_put;
 +---------+
 | out_put |
@@ -854,7 +855,7 @@ mysql> SELECT REPLACE('周芷若周芷若周芷若周芷若张无忌爱上了周
 
 #### 3.5.2.3 floor
 * 向下取整，返回<=该参数的最大整数
-* SELECT FLOOR(-9.99); -- -9
+* SELECT FLOOR(-9.99); -- -10
 * SELECT FLOOR(9.99); -- 9
 
 #### 3.5.2.4 truncate
@@ -1021,7 +1022,7 @@ mysql> SELECT last_name,commission_pct,IF(commission_pct IS NULL,'没奖金，�
 5 rows in set (0.00 sec)
 ```
 
-#### 3.5.5.2 case
+#### 3.5.5.2 case【作为表达式】
 * 使用一： switch case 的效果
 
 ```sql
@@ -2826,8 +2827,8 @@ INSERT INTO myv1 VALUES('张飞','zf@qq.com');
 # 八、变量
 ## 8.1 变量的分类
 * 系统变量：
-	* 全局变量
-	* 会话变量
+	* 全局变量：服务器层面上的，必须拥有super权限才能为系统变量赋值，作用域为整个服务器，也就是针对于所有连接（会话）有效
+	* 会话变量：服务器为每一个连接的客户端都提供了系统变量，作用域为当前的连接（会话）
 
 * 自定义变量：
 	* 用户变量
@@ -3087,29 +3088,324 @@ SELECT myf2('k_ing') $
 
 # 十、流程控制结构 
 ## 10.1 分支
-* if(条件，值1，值2)
-* case 表达式或字段<br>
-when 值1 then 语句1;<br>
-when 值2 then 语句2；<br>
+### 10.1.1 if结构
+* 功能：实现多重分支
+* 语法：<br>
+if 条件1 then 语句1;<br>
+elseif 条件2 then 语句2;<br>
+...<br>
+【else 语句n;】<br>
+end if;<br>
+
+* 应用在begin end中
+
+### 10.1.2 case结构
+#### 10.1.2.1 case结构作为表达式
+
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/17、case结构作为表达式.png"/> </div>
+
+#### 10.1.2.2 case结构作为独立的语句
+
+<div align="center"> <img src="https://cxquang.github.io/BigDataForLearn/_picture/MySQL基础/17、case结构作为独立的语句.png"/> </div>
+
+* 情况1：类似于Java中的switch语句，一般用于实现等值判断<br>
+* 情况2：类似于Java中的多重IF语句，一般用于实现区间判断<br>
+
+* 特点：<br>
+1、可以作为表达式，嵌套在其他语句中使用，可以放在任何地方，BEGIN END中或BEGIN END的外面；可以作为独立的语句去使用，只能放在BEGIN END中<br>
+2、如果WHEN中的值满足或条件成立，则执行对应的THEN后面的语句，并且结束CASE，如果都不满足，则执行ELSE中的语句或值<br>
+3、ELSE可以省略，如果ELSE省略了，并且所有WHEN条件都不满足，则返回NULL<br>
+
+## 10.3 示例
+
+```sql
+【创建函数，实现传入成绩，如果成绩>90,返回A，如果成绩>80,返回B，如果成绩>60,返回C，否则返回D】
+CREATE FUNCTION test_if(score FLOAT) RETURNS CHAR
+BEGIN
+	DECLARE ch CHAR DEFAULT 'A';
+	IF score>90 THEN SET ch='A';
+	ELSEIF score>80 THEN SET ch='B';
+	ELSEIF score>60 THEN SET ch='C';
+	ELSE SET ch='D';
+	END IF;
+	RETURN ch;
+END $
+
+CREATE FUNCTION test_if(score FLOAT) RETURNS CHAR
+BEGIN
+	IF score>90 THEN return 'A';
+	ELSEIF score>80 THEN return 'B';
+	ELSEIF score>60 THEN return 'C';
+	ELSE reutn 'D';
+	END IF;
+END $
+
+SELECT test_if(87)$
+【创建存储过程，如果工资<2000,则删除，如果5000>工资>2000,则涨工资1000，否则涨工资500】
+CREATE PROCEDURE test_if_pro(IN sal DOUBLE)
+BEGIN
+	IF sal<2000 THEN DELETE FROM employees WHERE employees.salary=sal;
+	ELSEIF sal>=2000 AND sal<5000 THEN UPDATE employees SET salary=salary+1000 WHERE employees.`salary`=sal;
+	ELSE UPDATE employees SET salary=salary+500 WHERE employees.`salary`=sal;
+	END IF;
+	
+END $
+
+CALL test_if_pro(2100)$
+
+【创建存储过程，根据传入的成绩，来显示等级，比如传入的成绩：90-100，显示A，80-90，显示B，60-80，显示c，否则，显示D】
+create procedure test_case(IN score INT)
+BEGIN
+	CASE
+	WHEN score>=90 AND score>=100 THEN SELECT 'A';
+	WHEN score>=80 THEN SELECT 'B';
+	WHEN score>=60 THEN select 'C';
+	else select 'D';
+	end case;
+END $
+
+CALL test_case(95)$
+```
+
 ## 10.2 循环
+### 10.2.1 介绍
+* 分类：while【先判断后执行】、loop、repeat【先执行后判断，无条件至少执行一次】
+* 循环控制：<br>
+iterate 类似于 continue，继续，结束本次循环，继续下一次<br>
+leave 类似于 break，跳出，结束当前所在的循环<br>
 
-* loop 一般用于实现简单的死循环
-* while 先判断后执行
-* repeat 先执行后判断，无条件至少执行一次
+### 10.2.2 while
+#### 10.2.2.1 语法
+
+```sql
+【标签:】while 循环条件 do
+		循环体;
+end while 【标签】;
+```
+
+#### 10.2.2.2 示例
+
+```sql
+【批量插入，根据次数插入到admin表中多条记录】
+CREATE PROCEDURE pro_while1(IN insertCount INT)
+BEGIN
+	DECLARE i INT DEFAULT 1;
+	WHILE i<=insertCount DO
+		INSERT INTO admin(username,`password`) VALUES(CONCAT('Rose',i),'666');
+		SET i=i+1;
+	END WHILE;
+	
+END $
+
+CALL pro_while1(100)$
+【批量插入，根据次数插入到admin表中多条记录，如果次数>20则停止】
+CREATE PROCEDURE test_while1(IN insertCount INT)
+BEGIN
+	DECLARE i INT DEFAULT 1;
+	a:WHILE i<=insertCount DO
+		INSERT INTO admin(username,`password`) VALUES(CONCAT('xiaohua',i),'0000');
+		IF i>=20 THEN LEAVE a;
+		END IF;
+		SET i=i+1;
+	END WHILE a;
+END $
 
 
+CALL test_while1(100)$
+```
 
+### 10.2.3 loop
+* 语法
 
+```sql
+【标签:】loop
+		循环体;
+end loop 【标签】;
+```
 
+可以用来模拟简单的死循环
 
+### 10.2.4 repeat
+* 语法
 
+```sql
+【标签:】repeat
+		循环体;
+until 结束循环的条件
+end repeat 【标签】;
+```
 
+# 十一、触发器
+## 11.1 概念
+* 触发器：trigger，事先为某张表绑定好一段代码，当表中的某些内容发生改变的时候（增删改）系统会自动触发代码，执行.
+* 触发器：事件类型，触发时间，触发对象
+* 事件类型：增删改，三种类型insert，deletq和update
+* 触发时间：前后：before 和after触发对象：表中的每一条记录【行】
+* 一张表中只能拥有一种触发时间的一种类型的触发器：最多一张表能有6个触发器
 
+## 12.2 创建触发器
+### 12.2.1 语法
+* 在mysql高级结构中：没有大括号，都是用对应的字符符号代替
 
+```sql
+-- 临时修改语句结束符
+Delimiter 自定义符号：后续代码中只有碰到自定义符号才算结束
 
+create trigger 触发器名字 触发时间 事件类型 on 表名 for each row
+Begin			-- 代表左大括号：开始
+				-- 里面就是触发器的内容：每行内容都必须使用语句结束符：分引
+End				-- 代表右带括号：结束
+-- 语句结束符
+自定义符号
 
+-- 将临时修改修正过来
+Delimiter ;
+```
 
+### 12.2.2 示例
 
+```sql
+--创建表
+create table my_goods(
+id int primary key auto_increment,
+name varchar(20) not null,
+price decimal(10,2) default 1,
+inv int comment '库存数量') charset utf8;
+
+insert into my_goods values(null,'iphone6s',5288,100),(null,'s6','6088','100');
+
+create table my_order(
+id int primary key auto_increment,
+g_id int not null comment '商品ID',
+g_number int comment'商品数量'
+)charset utf8;
+
+-- 触发器：订单生成一个，商品库存减少
+-- 临时修改语句结束符
+delimiter $$
+
+create trigger after_order after insert on my_order for each row 
+begin
+	-- 触发器内容开始
+	update my_goods set inv = inv - 1 where id=2;
+end
+-- 结束触发器
+$$
+
+-- 修改临时语句结束符
+delimiter ；
+```
+
+## 12.3 查看触发器
+* 所有的触发器都会保存一张表中：Information_schema.triggers
+
+```sql
+--查看所有触发器
+mysql> show triggers\G
+*************************** 1. row ***************************
+             Trigger: after_order
+               Event: INSERT
+               Table: my_order
+           Statement: begin
+
+update my_goods set inv = inv - 1 where id=2;
+end
+              Timing: AFTER
+             Created: NULL
+            sql_mode: STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+             Definer: root@localhost
+character_set_client: gb2312
+collation_connection: gb2312_chinese_ci
+  Database Collation: gb2312_chinese_ci
+1 row in set (0.02 sec)
+
+--查看触发器创建语句
+mysql> show create trigger after_order\G
+*************************** 1. row ***************************
+               Trigger: after_order
+              sql_mode: STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+SQL Original Statement: CREATE DEFINER=`root`@`localhost` trigger after_order after insert on my_order for each row
+begin
+
+update my_goods set inv = inv - 1 where id=2;
+end
+  character_set_client: gb2312
+  collation_connection: gb2312_chinese_ci
+    Database Collation: gb2312_chinese_ci
+1 row in set (0.00 sec)
+```
+
+## 12.4 使用触发器
+* 触发器：不需要手动调用，而是当某种情况发生时会自动触发（订单里面插入记录之后）
+
+```sql
+【增加订单前】
+mysql> select * from my_goods;
++----+----------+---------+------+
+| id | name     | price   | inv  |
++----+----------+---------+------+
+|  1 | iphone6s | 5288.00 |  100 |
+|  2 | s6       | 6088.00 |  100 |
++----+----------+---------+------+
+2 rows in set (0.00 sec)
+mysql> select * from my_order;
+Empty set (0.00 sec)
+【添加一条订单】
+--插入订单
+mysql> insert into my_order values(null,1,2);
+Query OK, 1 row affected (0.01 sec)
+【查看订单表】
+mysql> select * from my_order;
++----+------+----------+
+| id | g_id | g_number |
++----+------+----------+
+|  1 |    1 |        2 |
++----+------+----------+
+1 row in set (0.00 sec)
+【查看物品表，发现修改了，但是出现错误】
+mysql> select * from my_goods;
++----+----------+---------+------+
+| id | name     | price   | inv  |
++----+----------+---------+------+
+|  1 | iphone6s | 5288.00 |  100 |
+|  2 | s6       | 6088.00 |   99 |
++----+----------+---------+------+
+2 rows in set (0.00 sec)
+【1、触发器的确工作了：订单生成之后，对应商品表的商品数量减少了
+2、当前商品减少的，并不是订单中；产生的商品：而是固定死的商品】
+```
+
+## 12.5 修改触发器&删除
+* 触发器触发器不能修改，只能先删除，后新增。
+* Drop trigger 触发器名字;
+
+```sql
+mysql> drop trigger after_order;
+Query OK, 0 rows affected (0.00 sec)
+```
+
+## 12.5 触发器记录
+* 触发器记录：不管触发器是否触发了，只要当某种操作准备执行，系统就会将当前要操作的记录的当前状态和即将执行之后新的状态给分别保留下来，供触发器使用：其中，要操作的当前状态保存到old中，操作之后的可能形态保存给new.
+* o1d代表的是旧记录new代表的是新记录.删除的时候是没有new的；插入的时候是没有old 
+* old和new都是代表记录本身：任何一条记录除了有数据，还有字段名字使用方式：o1d字段名/new.字段名
+
+```sql
+【重新编写触发器】
+-- 触发器：订单生成一个，商品库存减少
+-- 临时修改语句结束符
+delimiter $$
+
+create trigger after_order after insert on my_order for each row 
+begin
+	-- 触发器内容开始：新增一条订单：o1d没有，new代表新的订单记录
+	update my_goods set inv = inv - new.g_number where id=new.g_id;
+end
+-- 结束触发器
+$$
+
+-- 修改临时语句结束符
+delimiter ；
+```
 
 
 
